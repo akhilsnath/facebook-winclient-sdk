@@ -312,6 +312,39 @@
         protected abstract IList GetData(IEnumerable<T> items);
 
         protected abstract Task LoadData();
+
+        public void SetSelectedItems(Func<T,bool> isSelectedItem)
+        {
+            if (this.SelectedItems != null)
+            {
+                this.SelectedItems.Clear();
+            }
+
+            
+            //this.SelectionChanged.RaiseEvent(this, new SelectionChangedEventArgs(new List<T>(), userList));
+
+            foreach (object item in this.longListSelector.ItemsSource)
+            {
+                
+               // PickerItem<T> value = item as PickerItem<T>;
+                //value.IsSelected
+               
+                    var alphaKeyGroup = item as Facebook.Client.Controls.AlphaKeyGroup<Facebook.Client.Controls.PickerItem<T>>;
+                    foreach (PickerItem<T> innerItem in alphaKeyGroup)
+                    {
+                        if (isSelectedItem(innerItem.Item))
+                        {
+                            innerItem.IsSelected = true;
+                            this.SelectedItems.Add(innerItem.Item);
+                        }
+                        else
+                        {
+                            innerItem.IsSelected = false;
+                        }
+                    }
+                }
+            
+        }
         
         #endregion Implementation
     }
