@@ -206,7 +206,7 @@ namespace Facebook.Client.Controls
             if (!string.IsNullOrEmpty(this.AccessToken))
             {
                 FacebookClient facebookClient = new FacebookClient(this.AccessToken);
-                
+
                 string graphUrl = string.Format(
                                         CultureInfo.InvariantCulture,
                                         "/{0}/friends?fields={1}",
@@ -222,7 +222,6 @@ namespace Facebook.Client.Controls
                     if (this.OnDataItemRetrieved(new DataItemRetrievedEventArgs<GraphUser>(user), e => e.Exclude))
                     {
                         this.Items.Add(user);
-                        
                     }
                 }
             }
@@ -261,9 +260,6 @@ namespace Facebook.Client.Controls
         {
             return FriendPickerDesignSupport.DesignData;
         }
-
-       
-        
 
         #endregion Implementation
     }
